@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import PropTypes from "prop-types";
 import { newLine } from "../actions/lineActions";
 
 class LineForm extends Component {
@@ -12,7 +11,7 @@ constructor(props) {
 //    };
 
 //    this.onChange = this.onChange.bind(this);
-//    this.onSubmit = this.onSubmit.bind(this);
+   this.onSubmit = this.onSubmit.bind(this);
 // }
 
 // onChange(e) {
@@ -32,7 +31,7 @@ onSubmit(e) {
    const range = document.querySelector("input");
    console.log(e, range.value);
 
-   this.newLine(range.value);
+   this.props.newLine(range.value);
 }
 
 render() {
@@ -69,9 +68,10 @@ render() {
 }
 }
 
-LineForm.propTypes = {
-   newLine: PropTypes.func.isRequired 
-};
+// PostForm.propTypes = {
+// createPost: PropTypes.func.isRequired
+// };
 
+// export default connect(null, { createPost })(PostForm);
 
 export default connect(null, { newLine })(LineForm);
