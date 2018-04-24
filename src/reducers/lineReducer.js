@@ -1,13 +1,10 @@
-// const initialState = {
-//    lines: [],
-//    line: {}
-// }
-
+//assigning our initial state for redux
 const initialState = {
   linesArray: [],
   selectedLine: null
 };
 
+//listing all of our reducer functions
 export default function (state = initialState, action) {
    switch (action.type) {
       //with the SELECT_LINE action, we are setting the selectedLine in state
@@ -31,8 +28,10 @@ export default function (state = initialState, action) {
             ...state,
             linesArray: [...state.linesArray.filter((line) => {
                return line.id !== action.id
-            })]
+            })],
+            selectedLine: null
          };
+      //default that returns the most recent state
       default:
          return state;
    }

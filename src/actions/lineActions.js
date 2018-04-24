@@ -1,4 +1,4 @@
-
+//set our lineId counter to 0 which will be used as our line id
 let nextLineId = 0;
 
 //reduce action that creates a new line from user information

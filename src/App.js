@@ -11,11 +11,12 @@ import LineCanvas from "./components/LineCanvas";
 class App extends Component {
   render() {
     return (
+       //we wrap our app in provider in order to gain access to the redux store
       <Provider store={store}>
          <div className="App">
             <header className="App-header">
                <img src={logo} className="App-logo" alt="logo" />
-               <h1 className="App-title">Welcome to React</h1>
+               <h1 className="App-title">Etch-A-Sketch</h1>
             </header>
             <hr />
             <LineForm />

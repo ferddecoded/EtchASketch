@@ -5,9 +5,10 @@ import rootReducer from "./reducers";
 
 //initial setup for store
 const initialState = {};
-
+//middleware for any asynchronist work
 const middleware = [thunk];
 
+//creating our store which will hold our redux states
 const store = createStore(
    rootReducer,
    initialState,

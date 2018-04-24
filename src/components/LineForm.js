@@ -8,6 +8,7 @@ class LineForm extends Component {
       this.onSubmit = this.onSubmit.bind(this);
    }
 
+   //onSubmit that takes the current values for the line height and line color to be sent to the newLine action
    onSubmit(e) {
       e.preventDefault();
 
@@ -26,15 +27,17 @@ class LineForm extends Component {
    }
 
    render() {
-      console.log(this.props)
+      // console.log(this.props)
       return (
          <div className="wrapper">
             <div className="lineForm">
                <h1>Line Details</h1>
+               {/* when the form is submitted, we pass our values from our inputs in order to save in state */}
                <form onSubmit={this.onSubmit}>
                   <div className="formInputContainer">
+                     {/* input for line height within our canvas element */}
                      <div className="formInput">
-                        <label>choose a Y-coordinate: </label>
+                        <label>choose a height for your line: </label>
                         <br />
                         <input 
                            className="lineHeight" 
@@ -46,6 +49,7 @@ class LineForm extends Component {
                               : `selected`
                            }/>
                      </div>
+                     {/* input for the color of our line */}
                      <div className="formInput">
                         <label>choose a color: </label>
                         <br />
@@ -53,6 +57,7 @@ class LineForm extends Component {
                      </div>
                   </div>
                   <br />
+                  {/* button that initiates our formSubmit method */}
                   <div className="formInput">
                      <button type="submit">Submit</button>
                   </div>
@@ -63,9 +68,11 @@ class LineForm extends Component {
    }
 }
 
+//
 const mapStateToProps = state => ({
   lines: state.lines,
   selectedLine: state.selectedLine
 });
 
+//we use connect in order to use our actions and map our state to props to be used within the component
 export default connect(mapStateToProps, { newLine })(LineForm);
