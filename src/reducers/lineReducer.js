@@ -1,19 +1,37 @@
+// const initialState = {
+//    lines: [],
+//    line: {}
+// }
+
 const initialState = {
-   lines: [],
-   line: {}
-}
+  linesArray: [],
+  selectedLine: null
+};
 
 export default function (state = initialState, action) {
    switch (action.type) {
-      case "FETCH_LINES":
+      //with the SELECT_LINE action, we are setting the selectedLine in state
+      case "SELECT_LINE":
          return {
             ...state,
-            // lines: action.payload
+            selectedLine: action.id
          };
+      //NEW_LINE is used to create a new line and save to state
       case "NEW_LINE":
+         // console.log("new line")
          return {
             ...state,
-            line: action.payload
+            linesArray: [...state.linesArray, action.payload]
+         };
+      //REMOVE_LINE is used to remove the line for the redux state
+      case "REMOVE_LINE":
+         console.log("REDUCE REMOVE line");
+
+         return {
+            ...state,
+            linesArray: [...state.linesArray.filter((line) => {
+               return line.id !== action.id
+            })]
          };
       default:
          return state;

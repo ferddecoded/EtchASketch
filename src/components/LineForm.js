@@ -3,75 +3,69 @@ import { connect } from "react-redux";
 import { newLine } from "../actions/lineActions";
 
 class LineForm extends Component {
-constructor(props) {
-   super(props);
-//    this.state = {
-//       title: "",
-//       body: ""
-//    };
+   constructor(props) {
+      super(props);
+      this.onSubmit = this.onSubmit.bind(this);
+   }
 
-//    this.onChange = this.onChange.bind(this);
-   this.onSubmit = this.onSubmit.bind(this);
-// }
+   onSubmit(e) {
+      e.preventDefault();
 
-// onChange(e) {
-//    this.setState({ [e.target.name]: e.target.value });
-}
+      const range = document.querySelector(".lineHeight");
+      const color = document.querySelector(".lineColor");
+      // console.log(range.value, color.value);
 
-onSubmit(e) {
-   e.preventDefault();
+      let rangeCheck = range.value.trim();
+      // console.log(rangeCheck, rangeCheck.length);
 
-   // const post = {
-   //    title: this.state.title,
-   //    body: this.state.body
-   // };
+      if (rangeCheck.length > 0) {
+         this.props.newLine(parseInt(range.value), color.value);
+      } else {
+         alert("Please enter a valid number");
+      }
+   }
 
-   // this.props.createPost(post);
-
-   const range = document.querySelector("input");
-   console.log(e, range.value);
-
-   this.props.newLine(range.value);
-}
-
-render() {
-   return (
-      <div>
-         <h1>Line Details</h1>
-         <form onSubmit={this.onSubmit}>
-            <div>
-               <label>choose a Y-coordinate: </label>
-               <br />
-               {/* <input
-               type="text"
-               name="title"
-               onChange={this.onChange}
-               value={this.state.title}
-               /> */}
-               <input type="range" name="yAxis" min="0" max="500" step="10"/>
+   render() {
+      console.log(this.props)
+      return (
+         <div className="wrapper">
+            <div className="lineForm">
+               <h1>Line Details</h1>
+               <form onSubmit={this.onSubmit}>
+                  <div className="formInputContainer">
+                     <div className="formInput">
+                        <label>choose a Y-coordinate: </label>
+                        <br />
+                        <input 
+                           className="lineHeight" 
+                           type="text" 
+                           name="yAxis" 
+                           placeholder={
+                              this.props.selectedLine === undefined
+                              ? `0 - 300`
+                              : `selected`
+                           }/>
+                     </div>
+                     <div className="formInput">
+                        <label>choose a color: </label>
+                        <br />
+                        <input className="lineColor" type="color" name="color"/>
+                     </div>
+                  </div>
+                  <br />
+                  <div className="formInput">
+                     <button type="submit">Submit</button>
+                  </div>
+               </form>
             </div>
-            <br />
-            {/* <div>
-               <label>Body: </label>
-               <br />
-               <textarea
-               name="body"
-               onChange={this.onChange}
-               value={this.state.body}
-               />
-            </div> */}
-            <br />
-            <button type="submit">Submit</button>
-         </form>
-      </div>
-   );
-}
+         </div>
+      );
+   }
 }
 
-// PostForm.propTypes = {
-// createPost: PropTypes.func.isRequired
-// };
+const mapStateToProps = state => ({
+  lines: state.lines,
+  selectedLine: state.selectedLine
+});
 
-// export default connect(null, { createPost })(PostForm);
-
-export default connect(null, { newLine })(LineForm);
+export default connect(mapStateToProps, { newLine })(LineForm);
